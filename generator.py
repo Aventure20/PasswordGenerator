@@ -1,13 +1,16 @@
-import random
-character = "AZERTYUIOPQSDFGHJKLMWXCVBNazertyuiopqsdfghjklmwxcvbn0123456789&#{([-_ç@?./:!§])}"
-length = int(input("Which length do you want for your password?\n"))
+import secrets
+
+MAXIMUM_PASSWORD_LENGTH = 80
+
+characters = r"AZERTYUIOPQSDFGHJKLMWXCVBNazertyuiopqsdfghjklmwxcvbn0123456789&#{([-_@?./\"':!])}"
+password_length = int(input("How long would you like your password?: "))
 while True:
-    if length < 81:
+    if password_length <= MAXIMUM_PASSWORD_LENGTH:
         break
     else:
-        print("Sorry but the max length for your password is =<80")
-        print("Please try again:")
-        length = int(input("Which length do you want for your password?\n"))
-password = "".join(random.sample(character, length))
+        print(f"Password must be below {MAXIMUM_PASSWORD_LENGTH} characters in length.")
+        print("Please try again: ")
+        password_length = int(input("How long would you like your password?: "))
+password = "".join(secrets.choice(characters) for i in range(0, password_length + 1))
 print(password)
-print("Password generated with success")
+print("Password successfully generated.")
